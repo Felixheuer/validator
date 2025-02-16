@@ -20,7 +20,7 @@ var rulesFuncMap = make(map[string]func(string, string, string, interface{}) err
 // see example in readme: https://github.com/thedevsaddam/validator#add-custom-rules
 func AddCustomRule(name string, fn func(field string, rule string, message string, value interface{}) error) {
 	if isRuleExist(name) {
-		panic(fmt.Errorf("validator: %s is already defined in rules", name))
+		panic(fmt.Errorf("validator: %s ist bereits in rules definiert", name))
 	}
 	rulesFuncMap[name] = fn
 }
@@ -42,7 +42,7 @@ func init() {
 
 	// Required check the Required fields
 	AddCustomRule("required", func(field, rule, message string, value interface{}) error {
-		err := fmt.Errorf("The %s field is required", field)
+		err := fmt.Errorf("Das Feld %s wird benötigt", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -143,12 +143,12 @@ func init() {
 					}
 				}
 			default:
-				panic("validator: invalid custom type for required rule")
+				panic("validator: ungültiger Typ für benötigte Rule")
 
 			}
 
 		default:
-			panic("validator: invalid type for required rule")
+			panic("validator: ungültiger Typ für benötigte Rule")
 
 		}
 		return nil
@@ -158,7 +158,7 @@ func init() {
 	// Regex:^[a-zA-Z]+$ means this field can only contain alphabet (a-z and A-Z)
 	AddCustomRule("regex", func(field, rule, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field format is invalid", field)
+		err := fmt.Errorf("Das Format für das Feld %s ist ungültig", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -172,7 +172,7 @@ func init() {
 	// Alpha check if provided field contains valid letters
 	AddCustomRule("alpha", func(field string, vlaue string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s may only contain letters", field)
+		err := fmt.Errorf("Das Feld %s darf nur Buchstaben enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -185,7 +185,7 @@ func init() {
 	// AlphaDash check if provided field contains valid letters, numbers, underscore and dash
 	AddCustomRule("alpha_dash", func(field string, vlaue string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s may only contain letters, numbers, and dashes", field)
+		err := fmt.Errorf("Das Feld %s darf nur Buchstaben, Nummern und Trennzeichen enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -198,7 +198,7 @@ func init() {
 	// AlphaDash check if provided field contains valid letters, numbers, underscore and dash
 	AddCustomRule("alpha_space", func(field string, vlaue string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s may only contain letters, numbers, dashes, space", field)
+		err := fmt.Errorf("Das Feld %s darf nur Buchstaben, Nummern, Trenn- und Leerzeichen enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -211,7 +211,7 @@ func init() {
 	// AlphaNumeric check if provided field contains valid letters and numbers
 	AddCustomRule("alpha_num", func(field string, vlaue string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s may only contain letters and numbers", field)
+		err := fmt.Errorf("Das Feld %s darf nur Buchstaben und Nummern enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -224,7 +224,7 @@ func init() {
 	// Boolean check if provided field contains Boolean
 	// in this case: "0", "1", 0, 1, "true", "false", true, false etc
 	AddCustomRule("bool", func(field string, vlaue string, message string, value interface{}) error {
-		err := fmt.Errorf("The %s may only contain boolean value, string or int 0, 1", field)
+		err := fmt.Errorf("Das Feld %s darf nur Booleans, Strings oder 1/0 enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -303,7 +303,7 @@ func init() {
 
 		max := int(maxFloat)
 
-		err = fmt.Errorf("The %s field must be between %d and %d", field, min, max)
+		err = fmt.Errorf("Das Feld %s muss ziwschen %d und %d sein", field, min, max)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -372,12 +372,12 @@ func init() {
 		case reflect.Float32:
 			in := float64(value.(float32))
 			if !(in >= minFloat && in <= maxFloat) {
-				return fmt.Errorf("The %s field must be between %f and %f", field, minFloat, maxFloat)
+				return fmt.Errorf("Das Feld %s muss ziwschen %f und %f sein", field, minFloat, maxFloat)
 			}
 		case reflect.Float64:
 			in := value.(float64)
 			if !(in >= minFloat && in <= maxFloat) {
-				return fmt.Errorf("The %s field must be between %f and %f", field, minFloat, maxFloat)
+				return fmt.Errorf("Das Feld %s muss ziwschen %f und %f sein", field, minFloat, maxFloat)
 			}
 
 		}
@@ -389,7 +389,7 @@ func init() {
 	// Accepted cards are Visa, MasterCard, American Express, Diners Club, Discover and JCB card
 	AddCustomRule("credit_card", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid credit card number", field)
+		err := fmt.Errorf("das Feld %s muss eine gültige Kreditkartennummer sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -402,7 +402,7 @@ func init() {
 	// Coordinate check if provided field contains valid Coordinate
 	AddCustomRule("coordinate", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid coordinate", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige Koordinate sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -415,7 +415,7 @@ func init() {
 	// ValidateCSSColor check if provided field contains a valid CSS color code
 	AddCustomRule("css_color", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid CSS color code", field)
+		err := fmt.Errorf("Das Feld %s muss gültiger CSS-Code sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -433,9 +433,9 @@ func init() {
 		if err != nil {
 			panic(errStringToInt)
 		}
-		err = fmt.Errorf("The %s field must be %d digits", field, l)
+		err = fmt.Errorf("das Feld %s muss %d Zahlen haben", field, l)
 		if l == 1 {
-			err = fmt.Errorf("The %s field must be 1 digit", field)
+			err = fmt.Errorf("Das Feld %s muss eine Zahl haben", field)
 		}
 		if message != "" {
 			err = errors.New(message)
@@ -473,7 +473,7 @@ func init() {
 		if err != nil {
 			panic(errStringToInt)
 		}
-		err = fmt.Errorf("The %s field must be digits between %d and %d", field, min, max)
+		err = fmt.Errorf("Das Feld %s muss zwischen %d und %d Zahlen haben", field, min, max)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -495,14 +495,14 @@ func init() {
 				if message != "" {
 					return errors.New(message)
 				}
-				return fmt.Errorf("The %s field must be a valid date format. e.g: dd-mm-yyyy, dd/mm/yyyy etc", field)
+				return fmt.Errorf("Das Feld %s muss ein gültiges Datumsformat haben, z. B.: dd-mm-yyyy, dd/mm/yyyy usw.", field)
 			}
 		default:
 			if !isDate(str) {
 				if message != "" {
 					return errors.New(message)
 				}
-				return fmt.Errorf("The %s field must be a valid date format. e.g: yyyy-mm-dd, yyyy/mm/dd etc", field)
+				return fmt.Errorf("Das Feld %s muss ein gültiges Datumsformat haben, z. B.: dd-mm-yyyy, dd/mm/yyyy usw.", field)
 			}
 		}
 
@@ -512,7 +512,7 @@ func init() {
 	// Email check the provided field is valid Email
 	AddCustomRule("email", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid email address", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige E-Mail-Adresse enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -525,7 +525,7 @@ func init() {
 	// validFloat check the provided field is valid float number
 	AddCustomRule("float", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a float number", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige Fließkommazahl sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -551,7 +551,7 @@ func init() {
 	// IP check if provided field is valid IP v4 address
 	AddCustomRule("ip_v4", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid IPv4 address", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige IPv4-Adresse sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -564,7 +564,7 @@ func init() {
 	// IP check if provided field is valid IP v6 address
 	AddCustomRule("ip_v6", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid IPv6 address", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige IPv6-Adresse sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -577,7 +577,7 @@ func init() {
 	// ValidateJSON check if provided field contains valid json string
 	AddCustomRule("json", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid JSON string", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige JSON-Zeichenkette enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -590,7 +590,7 @@ func init() {
 	/// Latitude check if provided field contains valid Latitude
 	AddCustomRule("lat", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid latitude", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige Breitengrad-Koordinate enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -603,7 +603,7 @@ func init() {
 	// Longitude check if provided field contains valid Longitude
 	AddCustomRule("lon", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid longitude", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige Längengrad-Koordinate enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -619,7 +619,7 @@ func init() {
 		if err != nil {
 			panic(errStringToInt)
 		}
-		err = fmt.Errorf("The %s field must be length of %d", field, l)
+		err = fmt.Errorf("Das Feld %s muss eine Länge von %d haben", field, l)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -651,11 +651,11 @@ func init() {
 		if err != nil {
 			panic(errStringToFloat)
 		}
-		errMsg := fmt.Errorf("The %s field value can not be less than %d", field, lenInt)
+		errMsg := fmt.Errorf("Der Wert des Feldes %s darf nicht kleiner als %d sein", field, lenInt)
 		if message != "" {
 			errMsg = errors.New(message)
 		}
-		errMsgFloat := fmt.Errorf("The %s field value can not be less than %f", field, lenFloat)
+		errMsgFloat := fmt.Errorf("Der Wert des Feldes %s darf nicht kleiner als %f sein", field, lenInt)
 		if message != "" {
 			errMsgFloat = errors.New(message)
 		}
@@ -667,7 +667,7 @@ func init() {
 				if message != "" {
 					return errors.New(message)
 				}
-				return fmt.Errorf("The %s field must be minimum %d char", field, lenInt)
+				return fmt.Errorf("Das Feld %s muss mindestens %d Zeichen lang sein", field, lenInt)
 			}
 		case reflect.Array, reflect.Map, reflect.Slice:
 			inLen := rv.Len()
@@ -675,7 +675,7 @@ func init() {
 				if message != "" {
 					return errors.New(message)
 				}
-				return fmt.Errorf("The %s field must be minimum %d in size", field, lenInt)
+				return fmt.Errorf("Das Feld %s muss mindestens %d groß sein", field, lenInt)
 			}
 		case reflect.Int:
 			in := value.(int)
@@ -759,11 +759,11 @@ func init() {
 		if err != nil {
 			panic(errStringToFloat)
 		}
-		errMsg := fmt.Errorf("The %s field value can not be greater than %d", field, lenInt)
+		errMsg := fmt.Errorf("Der Wert im Feld %s darf nicht größer als %d sein", field, lenInt)
 		if message != "" {
 			errMsg = errors.New(message)
 		}
-		errMsgFloat := fmt.Errorf("The %s field value can not be greater than %f", field, lenFloat)
+		errMsgFloat := fmt.Errorf("Der Wert im Feld %s darf nicht größer als %f sein", field, lenFloat)
 		if message != "" {
 			errMsgFloat = errors.New(message)
 		}
@@ -775,7 +775,7 @@ func init() {
 				if message != "" {
 					return errors.New(message)
 				}
-				return fmt.Errorf("The %s field must be maximum %d char", field, lenInt)
+				return fmt.Errorf("Das Feld %s darf maximal %d Zeichen lang sein", field, lenInt)
 			}
 		case reflect.Array, reflect.Map, reflect.Slice:
 			inLen := rv.Len()
@@ -783,7 +783,7 @@ func init() {
 				if message != "" {
 					return errors.New(message)
 				}
-				return fmt.Errorf("The %s field must be maximum %d in size", field, lenInt)
+				return fmt.Errorf("Das Feld %s darf maximal %d groß sein", field, lenInt)
 			}
 		case reflect.Int:
 			in := value.(int)
@@ -859,7 +859,7 @@ func init() {
 	// Numeric check if the value of the field is Numeric
 	AddCustomRule("mac_address", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be a valid Mac Address", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige MAC-Adresse sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -872,7 +872,7 @@ func init() {
 	// Numeric check if the value of the field is Numeric
 	AddCustomRule("numeric", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be numeric", field)
+		err := fmt.Errorf("Das Feld %s muss numerisch sein", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -917,11 +917,11 @@ func init() {
 		var errMsg error
 		switch {
 		case rng[0] == "":
-			errMsg = fmt.Errorf("The %s field value can not be greater than %d", field, max)
+			errMsg = fmt.Errorf("Der Wert im Feld %s darf nicht größer als %d sein", field, max)
 		case rng[1] == "":
-			errMsg = fmt.Errorf("The %s field value can not be less than %d", field, min)
+			errMsg = fmt.Errorf("Der Wert im Feld %s darf nicht kleiner als %d sein", field, min)
 		default:
-			errMsg = fmt.Errorf("The %s field must be numeric value between %d and %d", field, min, max)
+			errMsg = fmt.Errorf("Der Wert im Feld %s muss eine Zahl zwischen %d und %d sein", field, min, max)
 		}
 
 		if message != "" {
@@ -959,11 +959,12 @@ func init() {
 
 		switch {
 		case rng[0] == "":
-			errMsg = fmt.Errorf("The %s field value can not be greater than %f", field, maxFloat)
+			errMsg = fmt.Errorf("Der Wert im Feld %s darf nicht größer als %f sein", field, maxFloat)
 		case rng[1] == "":
-			errMsg = fmt.Errorf("The %s field value can not be less than %f", field, minFloat)
+			errMsg = fmt.Errorf("Der Wert im Feld %s darf nicht kleiner als %f sein", field, minFloat)
 		default:
-			errMsg = fmt.Errorf("The %s field must be numeric value between %f and %f", field, minFloat, maxFloat)
+			errMsg = fmt.Errorf("Der Wert im Feld %s muss eine Zahl zwischen %f und %f sein", field, minFloat, maxFloat)
+
 		}
 
 		if message != "" {
@@ -983,7 +984,7 @@ func init() {
 	// ValidateURL check if provided field is valid URL
 	AddCustomRule("url", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field format is invalid", field)
+		err := fmt.Errorf("Das Format des Feldes %s ist ungültig", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -996,7 +997,7 @@ func init() {
 	// UUID check if provided field contains valid UUID
 	AddCustomRule("uuid", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid UUID", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige UUID enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -1009,7 +1010,7 @@ func init() {
 	// UUID3 check if provided field contains valid UUID of version 3
 	AddCustomRule("uuid_v3", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid UUID V3", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige UUID V3 enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -1022,7 +1023,7 @@ func init() {
 	// UUID4 check if provided field contains valid UUID of version 4
 	AddCustomRule("uuid_v4", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid UUID V4", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige UUID V4 enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -1035,7 +1036,7 @@ func init() {
 	// UUID5 check if provided field contains valid UUID of version 5
 	AddCustomRule("uuid_v5", func(field string, rule string, message string, value interface{}) error {
 		str := toString(value)
-		err := fmt.Errorf("The %s field must contain valid UUID V5", field)
+		err := fmt.Errorf("Das Feld %s muss eine gültige UUID V5 enthalten", field)
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -1052,7 +1053,7 @@ func init() {
 			panic(errInvalidArgument)
 		}
 		str := toString(value)
-		err := fmt.Errorf("The %s field must be one of %v", field, strings.Join(rng, ", "))
+		err := fmt.Errorf("Das Feld %s muss einer der folgenden Werte sein: %v", field, strings.Join(rng, ", "))
 		if message != "" {
 			err = errors.New(message)
 		}
@@ -1069,7 +1070,7 @@ func init() {
 			panic(errInvalidArgument)
 		}
 		str := toString(value)
-		err := fmt.Errorf("The %s field must not be any of %v", field, strings.Join(rng, ", "))
+		err := fmt.Errorf("Das Feld %s darf keiner der folgenden Werte sein: %v", field, strings.Join(rng, ", "))
 		if message != "" {
 			err = errors.New(message)
 		}
