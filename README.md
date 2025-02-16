@@ -1,30 +1,16 @@
 
-[![Build Status](https://travis-ci.org/thedevsaddam/validator.svg?branch=master)](https://travis-ci.org/thedevsaddam/validator)
-[![Project status](https://img.shields.io/badge/version-1.9-green.svg)](https://github.com/thedevsaddam/validator/releases)
-[![Go Report Card](https://goreportcard.com/badge/github.com/thedevsaddam/validator)](https://goreportcard.com/report/github.com/thedevsaddam/validator)
-[![Coverage Status](https://coveralls.io/repos/github/thedevsaddam/validator/badge.svg?branch=master)](https://coveralls.io/github/thedevsaddam/validator?branch=master)
-[![GoDoc](https://godoc.org/github.com/thedevsaddam/validator?status.svg)](https://godoc.org/github.com/thedevsaddam/validator)
-[![License](https://img.shields.io/dub/l/vibe-d.svg)](https://github.com/thedevsaddam/validator/blob/dev/LICENSE.md)
-
-Validate golang request data with simple rules. Highly inspired by Laravel's request validation.
-
-
 ### Installation
 
 Install the package using
 ```go
-$ go get github.com/thedevsaddam/validator
-// or
-$ go get gopkg.in/thedevsaddam/validator.v1
+$ go get github.com/Felixheuer/validator2
 ```
 
 ### Usage
 
 To use the package import it in your `*.go` code
 ```go
-import "github.com/thedevsaddam/validator"
-// or
-import "gopkg.in/thedevsaddam/validator.v1"
+import "github.com/Felixheuer/validator"
 ```
 
 ### Example
@@ -40,7 +26,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/thedevsaddam/validator"
+	"github.com/Felixheuer/validator"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -214,25 +200,3 @@ opts := validator.Options{
 	Messages:        messages,
 }
 ```
-
-### Contribution
-If you are interested to make the package better please send pull requests or create an issue so that others can fix.
-[Read the contribution guide here](CONTRIBUTING.md)
-
-### Contributors
-
-- [Jun Kimura](https://github.com/bluele)
-- [Steve HIll](https://github.com/stevehill1981)
-- [ErickSkrauch](https://github.com/erickskrauch)
-- [Sakib Sami](https://github.com/s4kibs4mi)
-- [Rip](https://github.com/ripbandit)
-- [Jose Nazario](https://github.com/paralax)
-
-### See all [contributors](https://github.com/thedevsaddam/validator/graphs/contributors)
-
-### See [benchmarks](doc/BENCHMARK.md)
-### Read [API documentation](https://godoc.org/github.com/thedevsaddam/validator)
-
-### **License**
-The **validator** is an open-source software licensed under the [MIT License](LICENSE.md).
-# validator
