@@ -1,4 +1,3 @@
-![validator](validator.png)
 
 [![Build Status](https://travis-ci.org/thedevsaddam/validator.svg?branch=master)](https://travis-ci.org/thedevsaddam/validator)
 [![Project status](https://img.shields.io/badge/version-1.9-green.svg)](https://github.com/thedevsaddam/validator/releases)
